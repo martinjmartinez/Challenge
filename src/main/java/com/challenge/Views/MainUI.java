@@ -30,10 +30,12 @@ public class MainUI extends UI implements ViewDisplay{
 
         final CssLayout navigationBar = new CssLayout();
         navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
-        navigationBar.addComponent(createNavigationButton("UI Scoped View",
+        navigationBar.addComponent(createNavigationButton("Productos",
                 UIScopedView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("View Scoped View",
+        navigationBar.addComponent(createNavigationButton("Usuarios",
                 UsersView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Carrito",
+                CartView.VIEW_NAME));
 
         root.addComponent(navigationBar);
 

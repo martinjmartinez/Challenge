@@ -58,6 +58,7 @@ public class UIScopedView extends VerticalLayout implements View {
                 @Override
                 public void buttonClick(Button.ClickEvent event) {
                     Product product = (Product)event.getButton().getData();
+
                 }
             });
 
