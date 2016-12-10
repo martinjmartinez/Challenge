@@ -43,6 +43,7 @@ public class MainUI extends UI implements ViewDisplay{
         navigationBar.addComponent(createNavigationButton("Add Product",ProductFormView.VIEW_NAME));
         navigationBar.addComponent(createNavigationButton("Todas Las Ventas",ReceiptsView.VIEW_NAME));
         navigationBar.addComponent(createNavigationButton("Facturas Para Entregar",MarkAsDoneView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Historial de Compras",UserReceiptView.VIEW_NAME));
 
         springViewDisplay = new Panel();
         springViewDisplay.setSizeFull();

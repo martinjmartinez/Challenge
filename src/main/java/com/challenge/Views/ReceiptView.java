@@ -3,7 +3,17 @@ package com.challenge.Views;
 import com.challenge.Model.CartItem;
 import com.challenge.Model.Product;
 import com.challenge.Model.Receipt;
+import com.challenge.Model.User;
 import com.challenge.Services.ReceiptService;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.VaadinService;
+import com.vaadin.spring.annotation.SpringView;
+import com.vaadin.spring.annotation.UIScope;
+import com.vaadin.ui.VerticalLayout;
+import java.util.Date;
+import com.vaadin.ui.*;
+import java.util.List;
 import com.vaadin.data.Item;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.*;
@@ -39,6 +49,7 @@ public class ReceiptView extends Window{
         table.addContainerProperty("Quantity",Integer.class,null);
         table.addContainerProperty("Price",Float.class,null);
         table.setSizeFull();
+
 
         List<CartItem> products = receipt.getCartItems();
         for(CartItem p : products){

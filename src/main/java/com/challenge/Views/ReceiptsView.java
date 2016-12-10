@@ -35,8 +35,9 @@ public class ReceiptsView extends VerticalLayout implements View {
         setMargin(true);
         setSpacing(true);
         Table table = new Table("Todos Las Facturas");
-        table.addContainerProperty("Fecha",Date.class,null);
+        table.addContainerProperty("ID",Long.class,null);
         table.addContainerProperty("Usuario",String .class,null);
+        table.addContainerProperty("Fecha",Date.class,null);
         table.addContainerProperty("Entregada", Boolean.class,null);
         table.addContainerProperty("Action", Button.class,null);
 
@@ -56,7 +57,7 @@ public class ReceiptsView extends VerticalLayout implements View {
                     UI.getCurrent().addWindow(new ReceiptView(r));
                 }
             });
-
+            row1.getItemProperty("ID").setValue(r.getId());
             row1.getItemProperty("Fecha").setValue(new Date());
             row1.getItemProperty("Usuario").setValue(r.getUser().getName());
             row1.getItemProperty("Entregada").setValue(r.getDelivered());
