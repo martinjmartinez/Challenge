@@ -89,8 +89,10 @@ public class CartView extends VerticalLayout implements View {
                 receipt.setUser(currentUser);
 
                 float total = 0;
+                int CantidadItems = 0;
                 for(CartItem ci : cartItems){
                     total = total + ci.getProduct().getPrice() * ci.getQuantity();
+                    CantidadItems += ci.getProduct().getQuantity();
                 }
                 receipt.setTotal(total);
 
