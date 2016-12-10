@@ -50,6 +50,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private List<CartItem> cart = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<Receipt> receipts = new ArrayList<>();
+
     public User() {
     }
 
@@ -164,6 +167,14 @@ public class User implements Serializable {
 
     public void setCart(List<CartItem> cart) {
         this.cart = cart;
+    }
+
+    public List<Receipt> getReceipts() {
+        return receipts;
+    }
+
+    public void setReceipts(List<Receipt> receipts) {
+        this.receipts = receipts;
     }
 
 }

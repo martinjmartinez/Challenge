@@ -25,6 +25,8 @@ public class CartItem {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private User user;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Receipt receipt;
 
     public CartItem() {
     }
