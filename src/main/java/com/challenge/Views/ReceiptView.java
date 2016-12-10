@@ -31,6 +31,9 @@ public class ReceiptView extends Window{
         setWidth("50%");
         setHeight("80%");
 
+        Label total = new Label("Total: ");
+        Label date = new Label("Date: ");
+
         Table table = new Table("Todos Los Productos");
         table.addContainerProperty("Name",String.class,null);
         table.addContainerProperty("Quantity",Integer.class,null);
@@ -50,7 +53,9 @@ public class ReceiptView extends Window{
 
         // Disable the close button
         setClosable(true);
-
+        total.setSizeFull();
+        total.setValue(total.getValue() + receipt.getTotal());
+        date.setValue(receipt.getDate().toString());
         // Trivial logic for closing the sub-window
         Button ok = new Button("OK");
         ok.addClickListener(new Button.ClickListener() {
@@ -58,7 +63,7 @@ public class ReceiptView extends Window{
                 close(); // Close the sub-window
             }
         });
-        content.addComponents(table,ok);
+        content.addComponents(date,table,total,ok);
         setContent(content);
     }
 }

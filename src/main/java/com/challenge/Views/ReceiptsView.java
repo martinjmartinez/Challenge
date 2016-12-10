@@ -42,7 +42,7 @@ public class ReceiptsView extends VerticalLayout implements View {
 
         table.setSizeFull();
 
-        List<Receipt> receipts = receiptService.findByUser(userService.getCurrentUser());
+        List<Receipt> receipts = receiptService.findAll();
         for (Receipt r: receipts){
             Object newItemId = table.addItem();
             Item row1 = table.getItem(newItemId);
