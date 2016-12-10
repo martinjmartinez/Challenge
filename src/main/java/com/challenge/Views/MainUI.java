@@ -24,6 +24,7 @@ public class MainUI extends UI implements ViewDisplay{
     private CssLayout navigationBar = new CssLayout();
     @Override
     protected void init(VaadinRequest request) {
+        Button logout = new Button("Logout");
         root.setSizeFull();
         root.setMargin(true);
         root.setSpacing(true);
@@ -40,6 +41,16 @@ public class MainUI extends UI implements ViewDisplay{
         navigationBar.addComponent(createNavigationButton("Todas Las Ventas",ReceiptsView.VIEW_NAME));
         navigationBar.addComponent(createNavigationButton("Facturas Para Entregar",MarkAsDoneView.VIEW_NAME));
         navigationBar.addComponent(createNavigationButton("Historial de Compras",UserReceiptView.VIEW_NAME));
+        navigationBar.addComponent(logout);
+
+        logout.addStyleName(ValoTheme.BUTTON_SMALL);
+        logout.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+                VaadinService.getCurrentRequest().getWrappedSession().removeAttribute("current_user");
+                getUI().getPage().setLocation("/");
+            }
+        });
 
         springViewDisplay = new Panel();
         springViewDisplay.setSizeFull();
