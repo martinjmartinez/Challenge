@@ -17,11 +17,15 @@ public class Receipt {
 
     @Column
     private Boolean isDelivered = false;
+
     @Column
     private Date date;
 
     @Column
     private Float total;
+
+    @Column
+    private int cantidadItems;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner")
@@ -78,5 +82,13 @@ public class Receipt {
 
     public void setTotal(Float total) {
         this.total = total;
+    }
+
+    public int getCantidadItems() {
+        return cantidadItems;
+    }
+
+    public void setCantidadItems(int cantidadItems) {
+        this.cantidadItems = cantidadItems;
     }
 }
