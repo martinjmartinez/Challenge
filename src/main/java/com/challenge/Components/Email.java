@@ -9,9 +9,6 @@ import com.sparkpost.exception.SparkPostException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
-
 /**
  * Created by marti on 10/12/2016.
  */
@@ -33,10 +30,10 @@ public class Email {
                 "Challenge@sparkpostbox.com",
                 sendTo,
                 "Welcome!" +  user.getName() + user.getLastname() + "to our App",
-                "Your information:\n"
-                        + "Name: " + user.getName() + " " + user.getLastname()+"\n"
-                        + "Email: " + user.getEmail() + "\n"
-                        + "Password: " + user.getPassword() + "\n",
+                "<b>Your information:</b>\n"
+                        + "<p>Name: " + user.getName() + " " + user.getLastname()+"</p>"
+                        + "<p>Email: " + user.getEmail() + "</p>"
+                        + "<p>Password: " + user.getPassword() + "</p>",
                 "<b>Auto sent via Spring Vaadin Calendar</b>");
 
     }

@@ -23,7 +23,7 @@ public class CartItem {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private Receipt receipt;
 
     public CartItem() {
@@ -66,4 +66,11 @@ public class CartItem {
         this.user = user;
     }
 
+    public Receipt getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(Receipt receipt) {
+        this.receipt = receipt;
+    }
 }
