@@ -16,10 +16,16 @@ public class Receipt {
     private long id;
 
     @Column
+    private Boolean isDelivered = false;
+
+    @Column
     private Date date;
 
     @Column
     private Float total;
+
+    @Column
+    private int cantidadItems;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner")
@@ -52,6 +58,14 @@ public class Receipt {
         this.cartItems = cartItems;
     }
 
+    public Boolean getDelivered() {
+        return isDelivered;
+    }
+
+    public void setDelivered(Boolean delivered) {
+        isDelivered = delivered;
+    }
+
     public Receipt(){}
 
     public Date getDate() {
@@ -68,5 +82,13 @@ public class Receipt {
 
     public void setTotal(Float total) {
         this.total = total;
+    }
+
+    public int getCantidadItems() {
+        return cantidadItems;
+    }
+
+    public void setCantidadItems(int cantidadItems) {
+        this.cantidadItems = cantidadItems;
     }
 }
