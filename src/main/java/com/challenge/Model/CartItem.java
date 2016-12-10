@@ -1,6 +1,8 @@
 package com.challenge.Model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by marti on 10/12/2016.
@@ -63,4 +65,5 @@ public class CartItem {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

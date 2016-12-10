@@ -16,6 +16,7 @@ import com.vaadin.ui.VerticalLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,6 +33,9 @@ public class CartView extends VerticalLayout implements View {
 
     @Autowired
     UserService userService;
+
+   /* @Autowired
+    ReceiptService receiptService;*/
 
     @PostConstruct
     void init() {
@@ -69,6 +73,23 @@ public class CartView extends VerticalLayout implements View {
         save.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
+
+                //TODO AFTER RECEIPT MODEL IS DONE
+
+               /* Date date = new Date();
+                Receipt receipt = new Receipt();
+                receipt.setDate(date);
+                receipt.setProducts(cartItems);
+                receipt.setUser(currentUser);
+
+                float total = 0;
+                for(CartItem ci : cartItems){
+                    total = total + ci.getProduct().getPrice() * ci.getQuantity();
+                }
+
+                receipt.setTotal(total);
+
+                receiptService.save(receipt);*/
 
                 
             }

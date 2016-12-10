@@ -165,4 +165,5 @@ public class User implements Serializable {
     public void setCart(List<CartItem> cart) {
         this.cart = cart;
     }
+
 }
