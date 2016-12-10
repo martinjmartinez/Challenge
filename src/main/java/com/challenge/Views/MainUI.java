@@ -28,7 +28,6 @@ public class MainUI extends UI implements ViewDisplay{
         root.setSpacing(true);
         setContent(root);
 
-
         final CssLayout navigationBar = new CssLayout();
         navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
         navigationBar.addComponent(createNavigationButton("UI Scoped View",
