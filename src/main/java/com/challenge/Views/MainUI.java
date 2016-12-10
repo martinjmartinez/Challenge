@@ -20,20 +20,16 @@ import com.vaadin.ui.themes.ValoTheme;
 public class MainUI extends UI implements ViewDisplay{
 
     private Panel springViewDisplay;
-
+    private VerticalLayout root = new VerticalLayout();
+    private CssLayout navigationBar = new CssLayout();
     @Override
     protected void init(VaadinRequest request) {
-
-
-        final VerticalLayout root = new VerticalLayout();
         root.setSizeFull();
         root.setMargin(true);
         root.setSpacing(true);
 
-
-
         //TODO filter for user rol, easy enough, just make an if that contains all of the administrative buttons
-        final CssLayout navigationBar = new CssLayout();
+
         navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
 
         navigationBar.addComponent(createNavigationButton("Products",ProductsView.VIEW_NAME));
@@ -47,21 +43,10 @@ public class MainUI extends UI implements ViewDisplay{
 
         springViewDisplay = new Panel();
         springViewDisplay.setSizeFull();
+        filter();
 
 
-        User currentUser = (User) VaadinService.getCurrentRequest().getWrappedSession().getAttribute("current_user");
 
-        if (currentUser == null) {
-            getUI().getNavigator().navigateTo(LoginView.VIEW_NAME);
-            root.addComponent(springViewDisplay);
-            root.setExpandRatio(springViewDisplay, 1.0f);
-            setContent(root);
-        }else {
-            root.addComponent(navigationBar);
-            root.addComponent(springViewDisplay);
-            root.setExpandRatio(springViewDisplay, 1.0f);
-            setContent(root);
-        }
     }
     private Button createNavigationButton(String caption, final String viewName) {
         Button button = new Button(caption);
@@ -75,6 +60,22 @@ public class MainUI extends UI implements ViewDisplay{
     @Override
     public void showView(View view) {
         springViewDisplay.setContent((Component) view);
+    }
+
+    public void filter(){
+        User currentUser = (User) VaadinService.getCurrentRequest().getWrappedSession().getAttribute("current_user");
+
+        if (currentUser == null) {
+            getUI().getNavigator().navigateTo(LoginView.VIEW_NAME);
+            root.addComponent(springViewDisplay);
+            root.setExpandRatio(springViewDisplay, 1.0f);
+            setContent(root);
+        }else {
+            root.addComponent(navigationBar);
+            root.addComponent(springViewDisplay);
+            root.setExpandRatio(springViewDisplay, 1.0f);
+            setContent(root);
+        }
     }
 
 }

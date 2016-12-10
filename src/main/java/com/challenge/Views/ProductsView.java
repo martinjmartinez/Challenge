@@ -34,8 +34,11 @@ public class ProductsView extends VerticalLayout implements View {
     @Autowired
     private CartItemService cartItemService;
 
+    MainUI mainUI = new MainUI();
+
     @PostConstruct
     void init() {
+        mainUI.filter();
         setMargin(true);
         setSpacing(true);
         Table table = new Table("Todos Los Productos");

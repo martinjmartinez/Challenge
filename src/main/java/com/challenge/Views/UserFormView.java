@@ -28,10 +28,12 @@ public class UserFormView extends VerticalLayout implements View {
     @Autowired
     private UserService userService;
 
+    MainUI mainUI = new MainUI();
     private Email emailSender = new Email();
 
     @PostConstruct
     void init() {
+        mainUI.filter();
         VerticalLayout formContainer = new VerticalLayout();
         VerticalLayout container = new VerticalLayout();
         HorizontalLayout buttonsContainer = new HorizontalLayout();

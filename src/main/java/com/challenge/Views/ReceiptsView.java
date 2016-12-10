@@ -14,6 +14,7 @@ import com.vaadin.ui.*;
 import java.util.List;
 import com.vaadin.data.Item;
 import org.springframework.beans.factory.annotation.Autowired;
+import sun.applet.Main;
 
 import javax.annotation.PostConstruct;
 
@@ -30,8 +31,11 @@ public class ReceiptsView extends VerticalLayout implements View {
     @Autowired
     UserService userService;
 
+    MainUI mainUI = new MainUI();
+
     @PostConstruct
     void init() {
+        mainUI.filter();
         setMargin(true);
         setSpacing(true);
         Table table = new Table("Todos Las Facturas");

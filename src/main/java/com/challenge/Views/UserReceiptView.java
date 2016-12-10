@@ -28,8 +28,10 @@ public class UserReceiptView extends VerticalLayout implements View {
     @Autowired
     ReceiptService receiptService;
 
+    MainUI mainUI = new MainUI();
     @PostConstruct
     void init() {
+        mainUI.filter();
         setMargin(true);
         setSpacing(true);
         Table table = new Table("Historial De Compras");
@@ -52,8 +54,7 @@ public class UserReceiptView extends VerticalLayout implements View {
             button.addClickListener(new Button.ClickListener() {
                 @Override
                 public void buttonClick(Button.ClickEvent event) {
-                    r.setDelivered(true);
-                    receiptService.save(r);
+                    UI.getCurrent().addWindow(new ReceiptView(r));
                 }
             });
 

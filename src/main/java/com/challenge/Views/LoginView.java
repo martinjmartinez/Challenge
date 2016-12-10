@@ -30,8 +30,6 @@ public class LoginView extends VerticalLayout implements View {
 
     @PostConstruct
     void init() {
-
-
         Panel wrapper = new Panel();
         VerticalLayout content = new VerticalLayout();
         TextField usernameField = new TextField("E-mail");

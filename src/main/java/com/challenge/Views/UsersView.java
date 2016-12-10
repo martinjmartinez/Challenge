@@ -24,8 +24,11 @@ public class UsersView extends VerticalLayout implements View {
     @Autowired
     UserService userService;
 
+    MainUI mainUI = new MainUI();
+
     @PostConstruct
     void init() {
+        mainUI.filter();
         setMargin(true);
         setSpacing(true);
         Table table = new Table("Todos Los Usuarios");

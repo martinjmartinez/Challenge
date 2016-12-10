@@ -26,8 +26,11 @@ public class MarkAsDoneView extends VerticalLayout implements View {
 
     @Autowired
     ReceiptService receiptService;
+
+    MainUI mainUI = new MainUI();
     @PostConstruct
     void init() {
+        mainUI.filter();
         setMargin(true);
         setSpacing(true);
         Table table = new Table("Facturas Para Entregar");

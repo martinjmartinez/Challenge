@@ -42,10 +42,14 @@ public class CartView extends VerticalLayout implements View {
     @Autowired
     ReceiptService receiptService;
 
+    MainUI mainUI = new MainUI();
+
     private Email emailSender = new Email();
+
 
     @PostConstruct
     void init() {
+        mainUI.filter();
         setMargin(true);
         setSpacing(true);
         Table table = new Table("Your Shopping Cart");
@@ -118,4 +122,5 @@ public class CartView extends VerticalLayout implements View {
     public void enter(ViewChangeListener.ViewChangeEvent event) {
 
     }
+
 }
