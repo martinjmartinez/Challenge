@@ -2,9 +2,11 @@ package com.challenge.Views;
 
 import com.challenge.Model.Product;
 import com.challenge.Model.Receipt;
+import com.challenge.Model.User;
 import com.challenge.Services.ReceiptService;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.VaadinService;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.VerticalLayout;
@@ -31,12 +33,11 @@ public class ReceiptView extends VerticalLayout implements View {
         setSpacing(true);
         Table table = new Table("Todos Las Facturas");
         table.addContainerProperty("Fecha",Date.class,null);
-        table.addContainerProperty("Usuario",String .class,null);
+        table.addContainerProperty("Usuario",String.class,null);
         table.addContainerProperty("Entregada", Boolean.class,null);
         table.addContainerProperty("Action", Button.class,null);
 
         table.setSizeFull();
-
         List<Receipt> receipts = receiptService.findAll();
         for (Receipt r: receipts){
             Object newItemId = table.addItem();
@@ -47,13 +48,11 @@ public class ReceiptView extends VerticalLayout implements View {
             button.addClickListener(new Button.ClickListener() {
                 @Override
                 public void buttonClick(Button.ClickEvent event) {
-                    r.setDelivered(true);
-                    receiptService.save(r);
+                 //TODO open to modal to see details
                 }
             });
-
-            row1.getItemProperty("Fecha").setValue(new Date());
             row1.getItemProperty("Usuario").setValue(r.getUser().getName());
+            row1.getItemProperty("Fecha").setValue(new Date());
             row1.getItemProperty("Entregada").setValue(r.getDelivered());
             row1.getItemProperty("Action").setValue(button);
         }

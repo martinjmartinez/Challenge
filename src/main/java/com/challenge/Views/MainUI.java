@@ -42,6 +42,7 @@ public class MainUI extends UI implements ViewDisplay{
         navigationBar.addComponent(createNavigationButton("Add Product",ProductFormView.VIEW_NAME));
         navigationBar.addComponent(createNavigationButton("Todas Las Ventas",ReceiptView.VIEW_NAME));
         navigationBar.addComponent(createNavigationButton("Facturas Para Entregar",MarkAsDoneView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Historial de Compras",UserReceiptView.VIEW_NAME));
 
 
 
