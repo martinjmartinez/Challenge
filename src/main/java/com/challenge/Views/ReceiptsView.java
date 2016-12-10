@@ -35,7 +35,7 @@ public class ReceiptsView extends VerticalLayout implements View {
 
     @PostConstruct
     void init() {
-        mainUI.filter();
+        mainUI.filterPage();
         setMargin(true);
         setSpacing(true);
         Table table = new Table("Todos Las Facturas");

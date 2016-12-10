@@ -28,7 +28,7 @@ public class ProductFormView extends VerticalLayout implements View {
     MainUI mainUI = new MainUI();
     @PostConstruct
     void init() {
-        mainUI.filter();
+        mainUI.filterPage();
         VerticalLayout formContainer = new VerticalLayout();
         TextField name = new TextField("Name");
         TextField description = new TextField("Description");

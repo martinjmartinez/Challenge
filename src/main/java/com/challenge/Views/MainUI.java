@@ -30,18 +30,28 @@ public class MainUI extends UI implements ViewDisplay{
         root.setSpacing(true);
 
         //TODO filter for user rol, easy enough, just make an if that contains all of the administrative buttons
-
+        User currentUser = (User) VaadinService.getCurrentRequest().getWrappedSession().getAttribute("current_user");
         navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
 
-        navigationBar.addComponent(createNavigationButton("Products",ProductsView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Users",UsersView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Cart",CartView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Add User",UserFormView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Add Product",ProductFormView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Todas Las Ventas",ReceiptsView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Facturas Para Entregar",MarkAsDoneView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Historial de Compras",UserReceiptView.VIEW_NAME));
-        navigationBar.addComponent(logout);
+        if(currentUser == null){
+
+        }else{
+            if(currentUser.isAdmin()){
+                navigationBar.addComponent(createNavigationButton("Products",ProductsView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Users",UsersView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Add User",UserFormView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Add Product",ProductFormView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Todas Las Ventas",ReceiptsView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Facturas Para Entregar",MarkAsDoneView.VIEW_NAME));
+                navigationBar.addComponent(logout);
+            }else{
+                navigationBar.addComponent(createNavigationButton("Products",ProductsView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Cart",CartView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Historial de Compras",UserReceiptView.VIEW_NAME));
+                navigationBar.addComponent(logout);
+            }
+        }
+
 
         logout.addStyleName(ValoTheme.BUTTON_SMALL);
         logout.addClickListener(new Button.ClickListener() {
@@ -55,9 +65,6 @@ public class MainUI extends UI implements ViewDisplay{
         springViewDisplay = new Panel();
         springViewDisplay.setSizeFull();
         filter();
-
-
-
     }
     private Button createNavigationButton(String caption, final String viewName) {
         Button button = new Button(caption);
@@ -86,6 +93,16 @@ public class MainUI extends UI implements ViewDisplay{
             root.addComponent(springViewDisplay);
             root.setExpandRatio(springViewDisplay, 1.0f);
             setContent(root);
+        }
+    }
+
+    public void filterPage(){
+        User currentUser = (User) VaadinService.getCurrentRequest().getWrappedSession().getAttribute("current_user");
+
+        if (currentUser == null) {
+            getUI().getNavigator().navigateTo(LoginView.VIEW_NAME);
+        }else {
+
         }
     }
 

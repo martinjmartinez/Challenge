@@ -33,7 +33,7 @@ public class UserFormView extends VerticalLayout implements View {
 
     @PostConstruct
     void init() {
-        mainUI.filter();
+        mainUI.filterPage();
         VerticalLayout formContainer = new VerticalLayout();
         VerticalLayout container = new VerticalLayout();
         HorizontalLayout buttonsContainer = new HorizontalLayout();

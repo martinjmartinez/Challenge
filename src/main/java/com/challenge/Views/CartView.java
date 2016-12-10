@@ -49,7 +49,7 @@ public class CartView extends VerticalLayout implements View {
 
     @PostConstruct
     void init() {
-        mainUI.filter();
+        mainUI.filterPage();
         setMargin(true);
         setSpacing(true);
         Table table = new Table("Your Shopping Cart");

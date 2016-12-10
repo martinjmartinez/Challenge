@@ -31,7 +31,7 @@ public class UserReceiptView extends VerticalLayout implements View {
     MainUI mainUI = new MainUI();
     @PostConstruct
     void init() {
-        mainUI.filter();
+        mainUI.filterPage();
         setMargin(true);
         setSpacing(true);
         Table table = new Table("Historial De Compras");
