@@ -1,9 +1,13 @@
 package com.challenge.Views;
 
+import com.challenge.Components.Email;
 import com.challenge.Model.CartItem;
+import com.challenge.Model.Receipt;
 import com.challenge.Model.User;
 import com.challenge.Services.CartItemService;
+import com.challenge.Services.ReceiptService;
 import com.challenge.Services.UserService;
+import com.sparkpost.exception.SparkPostException;
 import com.vaadin.data.Item;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -34,8 +38,10 @@ public class CartView extends VerticalLayout implements View {
     @Autowired
     UserService userService;
 
-   /* @Autowired
-    ReceiptService receiptService;*/
+    @Autowired
+    ReceiptService receiptService;
+
+    private Email emailSender = new Email();
 
     @PostConstruct
     void init() {
@@ -68,33 +74,36 @@ public class CartView extends VerticalLayout implements View {
 
         }
 
-        Button save = new Button("Comprar");
+        Button checkout = new Button("Comprar");
 
-        save.addClickListener(new Button.ClickListener() {
+        checkout.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
 
                 //TODO AFTER RECEIPT MODEL IS DONE
 
-               /* Date date = new Date();
+                Date date = new Date();
                 Receipt receipt = new Receipt();
                 receipt.setDate(date);
-                receipt.setProducts(cartItems);
+                receipt.setCartItems(cartItems);
                 receipt.setUser(currentUser);
 
                 float total = 0;
                 for(CartItem ci : cartItems){
                     total = total + ci.getProduct().getPrice() * ci.getQuantity();
                 }
-
                 receipt.setTotal(total);
 
-                receiptService.save(receipt);*/
+                receiptService.save(receipt);
 
-                
+                try{
+                    emailSender.sendReceiptEmail(receipt);
+                }catch (SparkPostException e){
+                    System.out.print("Error: " + e);
+                }
             }
         });
-        addComponents(table, save);
+        addComponents(table, checkout);
     }
 
     @Override

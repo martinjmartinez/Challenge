@@ -44,6 +44,7 @@ public class User implements Serializable {
     @NotNull
     private boolean isEnterprise;
 
+
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private List<Product> products = new ArrayList<>();
 

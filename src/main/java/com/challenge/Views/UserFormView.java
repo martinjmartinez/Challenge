@@ -1,7 +1,9 @@
 package com.challenge.Views;
 
+import com.challenge.Components.Email;
 import com.challenge.Model.User;
 import com.challenge.Services.UserService;
+import com.sparkpost.exception.SparkPostException;
 import com.vaadin.data.Item;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
@@ -10,6 +12,7 @@ import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import sun.rmi.runtime.Log;
 
 import javax.annotation.PostConstruct;
 
@@ -24,6 +27,8 @@ public class UserFormView extends VerticalLayout implements View {
 
     @Autowired
     private UserService userService;
+
+    private Email emailSender = new Email();
 
     @PostConstruct
     void init() {
@@ -63,6 +68,12 @@ public class UserFormView extends VerticalLayout implements View {
             }
 
             userService.save(user);
+            try{
+                emailSender.sendUserEmail(user);
+            }catch (SparkPostException e){
+                System.out.print("Error: " + e);
+            }
+
 
             name.clear();
             lastname.clear();

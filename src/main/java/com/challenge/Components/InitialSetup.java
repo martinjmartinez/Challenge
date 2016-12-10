@@ -36,11 +36,11 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             return;
         }
 
-        if(!userService.exists("admin@gmail.com")) {
+        if(!userService.exists("djmartox2@gmail.com")) {
             User admin = new User();
-            admin.setName("Admin");
-            admin.setLastname("Admin");
-            admin.setEmail("admin@gmail.com");
+            admin.setName("Martin");
+            admin.setLastname("Martinez");
+            admin.setEmail("djmartox2@gmail.com");
             admin.setPassword("admin");
             admin.setRole("Sells Departament");
             admin.setAddress("Calle D, #10, Urb.Casilda");
@@ -61,25 +61,11 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             product3.setDescription("Lo mismo, pero diferente");
             product3.setQuantity(10);
 
-            CartItem cartItem = new CartItem();
-            cartItem.setUser(admin);
-            cartItem.setProduct(product);
-            cartItem.setQuantity(4);
-
-
-
-            Receipt r = new Receipt();
-            r.setUser(admin);
-
-
-
             userService.save(admin);
             productService.save(product);
             productService.save(product2);
             productService.save(product3);
-            cartItemService.save(cartItem);
-            r.setCartItems(cartItemService.findAll());
-            receiptService.save(r);
+
         }
 
         alreadySetup = true;
