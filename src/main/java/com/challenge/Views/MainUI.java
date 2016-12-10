@@ -31,21 +31,18 @@ public class MainUI extends UI implements ViewDisplay{
         root.setSpacing(true);
 
 
+
+        //TODO filter for user rol, easy enough, just make an if that contains all of the administrative buttons
         final CssLayout navigationBar = new CssLayout();
         navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
-        navigationBar.addComponent(createNavigationButton("Products",
-                ProductsView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Users",
-                UsersView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Cart",
-                CartView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Add User",
-                UserFormView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Add Product",
-                ProductFormView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Todas Las Ventas", ReceiptsView.VIEW_NAME));
 
-
+        navigationBar.addComponent(createNavigationButton("Products",ProductsView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Users",UsersView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Cart",CartView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Add User",UserFormView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Add Product",ProductFormView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Todas Las Ventas",ReceiptsView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Facturas Para Entregar",MarkAsDoneView.VIEW_NAME));
 
         springViewDisplay = new Panel();
         springViewDisplay.setSizeFull();
