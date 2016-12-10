@@ -1,7 +1,11 @@
 package com.challenge.Views;
 
+import com.challenge.Model.CartItem;
 import com.challenge.Model.Product;
+import com.challenge.Model.User;
+import com.challenge.Services.CartItemService;
 import com.challenge.Services.ProductService;
+import com.challenge.Services.UserService;
 import com.vaadin.data.Item;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.*;
@@ -24,26 +28,25 @@ public class ProductsView extends VerticalLayout implements View {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private CartItemService cartItemService;
+
     @PostConstruct
     void init() {
         setMargin(true);
         setSpacing(true);
         Table table = new Table("Todos Los Productos");
-        table.addContainerProperty("Nombre",String.class,null);
-        table.addContainerProperty("Cantidad",Integer.class,null);
-        table.addContainerProperty("Precio",Float.class,null);
-        table.addContainerProperty("boton", Button.class,null);
+        table.addContainerProperty("Name",String.class,null);
+        table.addContainerProperty("Description",String .class,null);
+        table.addContainerProperty("Quantity available",Integer.class,null);
+        table.addContainerProperty("Price",Float.class,null);
+        table.addContainerProperty("Action", Button.class,null);
 
         table.setSizeFull();
 
-        for(int i = 0; i < 3; i++){
-            Product p = new Product();
-            p.setDescription("asdf");
-            p.setName("asdf");
-            p.setQuantity(i);
-            p.setPrice((float)i);
-            productService.save(p);
-        }
         List<Product> productos = productService.findAll();
         for (Product p: productos){
             Object newItemId = table.addItem();
@@ -54,15 +57,28 @@ public class ProductsView extends VerticalLayout implements View {
             button.addClickListener(new Button.ClickListener() {
                 @Override
                 public void buttonClick(Button.ClickEvent event) {
-                    Product product = (Product)event.getButton().getData();
+                    User currentUser = userService.getCurrentUser();
 
+                    if(cartItemService.findByUserAndProduct(currentUser, p)!=null){
+                        CartItem cartItem = cartItemService.findByUserAndProduct(currentUser, p);
+                        cartItem.setQuantity(cartItem.getQuantity() + 1);
+                        cartItemService.save(cartItem);
+
+                    }else{
+                        CartItem cartItem = new CartItem();
+                        cartItem.setProduct(p);
+                        cartItem.setQuantity(1);
+                        cartItem.setUser(currentUser);
+                        cartItemService.save(cartItem);
+                    }
                 }
             });
 
-            row1.getItemProperty("Cantidad").setValue(p.getQuantity());
-            row1.getItemProperty("Nombre").setValue(p.getName());
-            row1.getItemProperty("Precio").setValue(p.getPrice());
-            row1.getItemProperty("boton").setValue(button);
+            row1.getItemProperty("Quantity available").setValue(p.getQuantity());
+            row1.getItemProperty("Name").setValue(p.getName());
+            row1.getItemProperty("Description").setValue(p.getDescription());
+            row1.getItemProperty("Price").setValue(p.getPrice());
+            row1.getItemProperty("Action").setValue(button);
         }
 
         addComponent(table);

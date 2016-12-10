@@ -67,6 +67,7 @@ public class ProductFormView extends VerticalLayout implements View {
         quantity.setWidth("100%");
         buttons.setWidth("100%");
         formContainer.setSpacing(true);
+        formContainer.setMargin(true);
 
         name.setCaption("Name:");
         description.setCaption("Description:");

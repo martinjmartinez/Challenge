@@ -44,9 +44,11 @@ public class User implements Serializable {
     @NotNull
     private boolean isEnterprise;
 
-
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    private List<CartItem> cart = new ArrayList<>();
 
     public User() {
     }
@@ -154,5 +156,13 @@ public class User implements Serializable {
         }else if(accountType.equals("Final")){
             isEnterprise=false;
         }
+    }
+
+    public List<CartItem> getCart() {
+        return cart;
+    }
+
+    public void setCart(List<CartItem> cart) {
+        this.cart = cart;
     }
 }

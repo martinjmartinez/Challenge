@@ -3,6 +3,8 @@ package com.challenge.Model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by martin on 07/12/16.
@@ -29,6 +31,9 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private User user;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    private List<CartItem> productInCart = new ArrayList<>();
 
     public Product() {
     }
@@ -86,5 +91,13 @@ public class Product {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<CartItem> getProductInCart() {
+        return productInCart;
+    }
+
+    public void setProductInCart(List<CartItem> productInCart) {
+        this.productInCart = productInCart;
     }
 }

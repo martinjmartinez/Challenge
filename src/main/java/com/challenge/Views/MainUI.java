@@ -1,9 +1,11 @@
 package com.challenge.Views;
 
+import com.challenge.Model.User;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinService;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.ui.*;
@@ -21,11 +23,13 @@ public class MainUI extends UI implements ViewDisplay{
 
     @Override
     protected void init(VaadinRequest request) {
+
+
         final VerticalLayout root = new VerticalLayout();
         root.setSizeFull();
         root.setMargin(true);
         root.setSpacing(true);
-        setContent(root);
+
 
         final CssLayout navigationBar = new CssLayout();
         navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
@@ -40,12 +44,25 @@ public class MainUI extends UI implements ViewDisplay{
         navigationBar.addComponent(createNavigationButton("Add Product",
                 ProductFormView.VIEW_NAME));
 
-        root.addComponent(navigationBar);
+
 
         springViewDisplay = new Panel();
         springViewDisplay.setSizeFull();
-        root.addComponent(springViewDisplay);
-        root.setExpandRatio(springViewDisplay, 1.0f);
+
+
+        User currentUser = (User) VaadinService.getCurrentRequest().getWrappedSession().getAttribute("current_user");
+
+        if (currentUser == null) {
+            getUI().getNavigator().navigateTo(LoginView.VIEW_NAME);
+            root.addComponent(springViewDisplay);
+            root.setExpandRatio(springViewDisplay, 1.0f);
+            setContent(root);
+        }else {
+            root.addComponent(navigationBar);
+            root.addComponent(springViewDisplay);
+            root.setExpandRatio(springViewDisplay, 1.0f);
+            setContent(root);
+        }
     }
     private Button createNavigationButton(String caption, final String viewName) {
         Button button = new Button(caption);
