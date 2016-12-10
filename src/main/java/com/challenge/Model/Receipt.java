@@ -14,6 +14,10 @@ public class Receipt {
     @GeneratedValue
     private long id;
 
+
+
+    @Column
+    private Boolean isDelivered = false;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner")
     private User user;
@@ -43,6 +47,14 @@ public class Receipt {
 
     public void setCartItems(List<CartItem> cartItems) {
         this.cartItems = cartItems;
+    }
+
+    public Boolean getDelivered() {
+        return isDelivered;
+    }
+
+    public void setDelivered(Boolean delivered) {
+        isDelivered = delivered;
     }
 
     public Receipt(){}
