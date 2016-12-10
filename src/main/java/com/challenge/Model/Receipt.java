@@ -27,11 +27,11 @@ public class Receipt {
     @Column
     private int cantidadItems;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER,  cascade = CascadeType.DETACH)
     @JoinColumn(name = "owner")
     private User user;
 
-    @OneToMany(mappedBy = "receipt")
+    @OneToMany(mappedBy = "receipt", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private List<CartItem> cartItems = new ArrayList<>();
 
     public long getId() {
@@ -91,4 +91,6 @@ public class Receipt {
     public void setCantidadItems(int cantidadItems) {
         this.cantidadItems = cantidadItems;
     }
+
+
 }

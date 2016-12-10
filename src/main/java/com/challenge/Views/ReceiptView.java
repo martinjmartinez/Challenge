@@ -1,67 +1,64 @@
 package com.challenge.Views;
 
+import com.challenge.Model.CartItem;
 import com.challenge.Model.Product;
 import com.challenge.Model.Receipt;
 import com.challenge.Services.ReceiptService;
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.spring.annotation.SpringView;
-import com.vaadin.spring.annotation.UIScope;
-import com.vaadin.ui.VerticalLayout;
-import java.util.Date;
-import com.vaadin.ui.*;
-import java.util.List;
 import com.vaadin.data.Item;
+import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.PostConstruct;
+import java.util.List;
+
 
 /**
- * Created by Edward on 12/10/2016.
+ * Created by marti on 10/12/2016.
  */
-@UIScope
-@SpringView(name = ReceiptView.VIEW_NAME)
-public class ReceiptView extends VerticalLayout implements View {
-    public static final String VIEW_NAME = "receipts";
+
+public class ReceiptView extends Window{
+
     @Autowired
     ReceiptService receiptService;
-    @PostConstruct
-    void init() {
-        setMargin(true);
-        setSpacing(true);
-        Table table = new Table("Todos Las Facturas");
-        table.addContainerProperty("Fecha",Date.class,null);
-        table.addContainerProperty("Usuario",String .class,null);
-        table.addContainerProperty("Entregada", Boolean.class,null);
-        table.addContainerProperty("Action", Button.class,null);
 
+    public ReceiptView(Receipt receipt) {
+        super("Receipt"); // Set window caption
+        center();
+
+        // Some basic content for the window
+        VerticalLayout content = new VerticalLayout();
+        content.setMargin(true);
+        setWidth("50%");
+        setHeight("80%");
+
+        Table table = new Table("Todos Los Productos");
+        table.addContainerProperty("Name",String.class,null);
+        table.addContainerProperty("Quantity",Integer.class,null);
+        table.addContainerProperty("Price",Float.class,null);
         table.setSizeFull();
 
-        List<Receipt> receipts = receiptService.findAll();
-        for (Receipt r: receipts){
+        List<CartItem> products = receipt.getCartItems();
+        for(CartItem p : products){
             Object newItemId = table.addItem();
             Item row1 = table.getItem(newItemId);
 
-            Button button = new Button("Ver Detalles");
-            button.setData(r);
-            button.addClickListener(new Button.ClickListener() {
-                @Override
-                public void buttonClick(Button.ClickEvent event) {
-                    r.setDelivered(true);
-                    receiptService.save(r);
-                }
-            });
+            row1.getItemProperty("Quantity").setValue(p.getQuantity());
+            row1.getItemProperty("Name").setValue(p.getProduct().getName());
+            row1.getItemProperty("Price").setValue(p.getProduct().getPrice());
 
-            row1.getItemProperty("Fecha").setValue(new Date());
-            row1.getItemProperty("Usuario").setValue(r.getUser().getName());
-            row1.getItemProperty("Entregada").setValue(r.getDelivered());
-            row1.getItemProperty("Action").setValue(button);
         }
 
-        addComponent(table);
-    }
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent event) {
+        // Disable the close button
+        setClosable(true);
 
+        // Trivial logic for closing the sub-window
+        Button ok = new Button("OK");
+        ok.addClickListener(new Button.ClickListener() {
+            public void buttonClick(Button.ClickEvent event) {
+                close(); // Close the sub-window
+            }
+        });
+        content.addComponents(table,ok);
+        setContent(content);
     }
 }

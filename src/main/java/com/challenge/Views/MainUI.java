@@ -43,7 +43,7 @@ public class MainUI extends UI implements ViewDisplay{
                 UserFormView.VIEW_NAME));
         navigationBar.addComponent(createNavigationButton("Add Product",
                 ProductFormView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Todas Las Ventas",ReceiptView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Todas Las Ventas", ReceiptsView.VIEW_NAME));
 
 
 

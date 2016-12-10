@@ -20,6 +20,7 @@ import com.vaadin.ui.VerticalLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -93,13 +94,18 @@ public class CartView extends VerticalLayout implements View {
                     total = total + ci.getProduct().getPrice() * ci.getQuantity();
                 }
                 receipt.setTotal(total);
-
-                receiptService.save(receipt);
-
-                try{
+                //TODO UNCOMMENT
+               /* try{
                     emailSender.sendReceiptEmail(receipt);
                 }catch (SparkPostException e){
                     System.out.print("Error: " + e);
+                }*/
+                receiptService.save(receipt);
+
+                for(CartItem ci : cartItems){
+                  ci.setReceipt(receipt);
+                  cartItemService.save(ci);
+
                 }
             }
         });
