@@ -1,8 +1,12 @@
 package com.challenge.Components;
 
+import com.challenge.Model.CartItem;
 import com.challenge.Model.Product;
+import com.challenge.Model.Receipt;
 import com.challenge.Model.User;
+import com.challenge.Services.CartItemService;
 import com.challenge.Services.ProductService;
+import com.challenge.Services.ReceiptService;
 import com.challenge.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -19,6 +23,10 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
     UserService userService;
     @Autowired
     ProductService productService;
+    @Autowired
+    ReceiptService receiptService;
+    @Autowired
+    CartItemService cartItemService;
 
     boolean alreadySetup = false;
 
@@ -53,10 +61,25 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             product3.setDescription("Lo mismo, pero diferente");
             product3.setQuantity(10);
 
+            CartItem cartItem = new CartItem();
+            cartItem.setUser(admin);
+            cartItem.setProduct(product);
+            cartItem.setQuantity(4);
+
+
+
+            Receipt r = new Receipt();
+            r.setUser(admin);
+
+
+
             userService.save(admin);
             productService.save(product);
             productService.save(product2);
             productService.save(product3);
+            cartItemService.save(cartItem);
+            r.setCartItems(cartItemService.findAll());
+            receiptService.save(r);
         }
 
         alreadySetup = true;
