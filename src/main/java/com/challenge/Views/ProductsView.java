@@ -2,7 +2,6 @@ package com.challenge.Views;
 
 import com.challenge.Model.Product;
 import com.challenge.Services.ProductService;
-import com.challenge.Services.UserService;
 import com.vaadin.data.Item;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.*;
@@ -12,17 +11,15 @@ import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by martin on 09/12/16.
  */
 @UIScope
-@SpringView(name = UIScopedView.VIEW_NAME)
-public class UIScopedView extends VerticalLayout implements View {
-    public static final String VIEW_NAME = "ui";
+@SpringView(name = ProductsView.VIEW_NAME)
+public class ProductsView extends VerticalLayout implements View {
+    public static final String VIEW_NAME = "products";
 
     @Autowired
     private ProductService productService;
@@ -37,7 +34,7 @@ public class UIScopedView extends VerticalLayout implements View {
         table.addContainerProperty("Precio",Float.class,null);
         table.addContainerProperty("boton", Button.class,null);
 
-
+        table.setSizeFull();
 
         for(int i = 0; i < 3; i++){
             Product p = new Product();

@@ -19,7 +19,6 @@ public class MainUI extends UI implements ViewDisplay{
 
     private Panel springViewDisplay;
 
-
     @Override
     protected void init(VaadinRequest request) {
         final VerticalLayout root = new VerticalLayout();
@@ -30,12 +29,16 @@ public class MainUI extends UI implements ViewDisplay{
 
         final CssLayout navigationBar = new CssLayout();
         navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
-        navigationBar.addComponent(createNavigationButton("Productos",
-                UIScopedView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Usuarios",
+        navigationBar.addComponent(createNavigationButton("Products",
+                ProductsView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Users",
                 UsersView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Carrito",
+        navigationBar.addComponent(createNavigationButton("Cart",
                 CartView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Add User",
+                UserFormView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Add Product",
+                ProductFormView.VIEW_NAME));
 
         root.addComponent(navigationBar);
 

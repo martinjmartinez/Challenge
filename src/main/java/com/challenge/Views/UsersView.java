@@ -30,13 +30,27 @@ public class UsersView extends VerticalLayout implements View {
         setSpacing(true);
         Table table = new Table("Todos Los Usuarios");
 
-        table.addContainerProperty("Nombre",String.class,null);
+        table.addContainerProperty("Name",String.class,null);
+        table.addContainerProperty("Lastname",String.class,null);
+        table.addContainerProperty("Role",String.class,null);
+        table.addContainerProperty("Account",String.class,null);
+        table.addContainerProperty("Email",String.class,null);
+        table.addContainerProperty("Address",String.class,null);
+
+        table.setSizeFull();
 
         List<User> usuarios = userService.findAll();
         for(User u: usuarios){
             Object newItemId = table.addItem();
-            Item row1 = table.getItem(newItemId);
-            row1.getItemProperty("Nombre").setValue(u.getName());
+            Item row = table.getItem(newItemId);
+
+            row.getItemProperty("Name").setValue(u.getName());
+            row.getItemProperty("Lastname").setValue(u.getLastname());
+            row.getItemProperty("Role").setValue(u.getRole());
+            row.getItemProperty("Account").setValue(u.getAccountType());
+            row.getItemProperty("Email").setValue(u.getEmail());
+            row.getItemProperty("Address").setValue(u.getAddress());
+
             //TODO show different users
         }
 
