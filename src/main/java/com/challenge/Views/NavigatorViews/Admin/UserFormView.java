@@ -22,7 +22,7 @@ import javax.annotation.PostConstruct;
 @UIScope
 @SpringView(name = UserFormView.VIEW_NAME)
 public class UserFormView extends VerticalLayout implements View {
-    public static final String VIEW_NAME = "userform";
+    public static final String VIEW_NAME = "Create_User";
 
     @Autowired
     private UserService userService;

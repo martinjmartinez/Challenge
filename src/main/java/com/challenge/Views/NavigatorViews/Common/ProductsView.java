@@ -23,7 +23,7 @@ import java.util.List;
 @UIScope
 @SpringView(name = ProductsView.VIEW_NAME)
 public class ProductsView extends VerticalLayout implements View {
-    public static final String VIEW_NAME = "products";
+    public static final String VIEW_NAME = "Products";
 
     @Autowired
     private ProductService productService;

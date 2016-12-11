@@ -17,7 +17,7 @@ import com.vaadin.ui.themes.ValoTheme;
 /**
  * Created by martin on 09/12/16.
  */
-@Theme("valo")
+@Theme(ValoTheme.THEME_NAME)
 @SpringUI
 @SpringViewDisplay
 public class MainUI extends UI implements ViewDisplay{

@@ -21,7 +21,7 @@ import javax.annotation.PostConstruct;
 @UIScope
 @SpringView(name = LoginView.VIEW_NAME)
 public class LoginView extends VerticalLayout implements View {
-    public static final String VIEW_NAME = "login";
+    public static final String VIEW_NAME = "Login";
 
     @Autowired
     private UserService userService;

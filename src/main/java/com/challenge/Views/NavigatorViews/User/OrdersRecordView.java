@@ -25,7 +25,7 @@ import javax.annotation.PostConstruct;
 @UIScope
 @SpringView(name = OrdersRecordView.VIEW_NAME)
 public class OrdersRecordView extends VerticalLayout implements View {
-    public static final String VIEW_NAME = "Userreceipts";
+    public static final String VIEW_NAME = "Orders_Record";
     @Autowired
     ReceiptService receiptService;
 

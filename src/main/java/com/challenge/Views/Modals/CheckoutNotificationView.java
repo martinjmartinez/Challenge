@@ -1,4 +1,4 @@
-package com.challenge.Views;
+package com.challenge.Views.Modals;
 
 import com.challenge.Model.CartItem;
 import com.challenge.Model.Product;
@@ -26,12 +26,12 @@ import java.util.List;
  * Created by marti on 10/12/2016.
  */
 
-public class SuccesView extends Window{
+public class CheckoutNotificationView extends Window{
 
     @Autowired
     ReceiptService receiptService;
 
-    public SuccesView(Receipt receipt) {
+    public CheckoutNotificationView(Receipt receipt) {
         super("Receipt"); // Set window caption
         center();
 

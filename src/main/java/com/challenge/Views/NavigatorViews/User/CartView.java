@@ -7,7 +7,9 @@ import com.challenge.Model.User;
 import com.challenge.Services.CartItemService;
 import com.challenge.Services.ReceiptService;
 import com.challenge.Services.UserService;
+import com.challenge.Views.Modals.CheckoutNotificationView;
 import com.challenge.Views.NavigatorViews.Common.MainUI;
+import com.sparkpost.exception.SparkPostException;
 import com.vaadin.data.Item;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -27,7 +29,7 @@ import java.util.List;
 @UIScope
 @SpringView(name = CartView.VIEW_NAME)
 public class CartView extends VerticalLayout implements View {
-    public static final String VIEW_NAME = "cart";
+    public static final String VIEW_NAME = "Cart";
 
     @Autowired
     CartItemService cartItemService;
@@ -109,7 +111,7 @@ public class CartView extends VerticalLayout implements View {
                   cartItemService.save(ci);
 
                 }
-                UI.getCurrent().addWindow(new SuccesView(receipt));
+                UI.getCurrent().addWindow(new CheckoutNotificationView(receipt));
             }
         });
         addComponents(table, checkout);

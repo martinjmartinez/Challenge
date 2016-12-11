@@ -20,7 +20,7 @@ import javax.annotation.PostConstruct;
 @UIScope
 @SpringView(name = ProductFormView.VIEW_NAME)
 public class ProductFormView extends VerticalLayout implements View {
-    public static final String VIEW_NAME = "productform";
+    public static final String VIEW_NAME = "Create_Product";
 
     @Autowired
     ProductService productService;

@@ -19,7 +19,7 @@ import java.util.List;
  */
 @SpringView(name = UsersView.VIEW_NAME)
 public class UsersView extends VerticalLayout implements View {
-    public static final String VIEW_NAME = "users";
+    public static final String VIEW_NAME = "Users";
 
     @Autowired
     UserService userService;
