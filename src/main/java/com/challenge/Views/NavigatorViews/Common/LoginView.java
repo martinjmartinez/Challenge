@@ -1,4 +1,4 @@
-package com.challenge.Views;
+package com.challenge.Views.NavigatorViews.Common;
 
 import com.challenge.Model.User;
 import com.challenge.Services.UserService;

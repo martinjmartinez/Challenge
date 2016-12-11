@@ -1,8 +1,8 @@
-package com.challenge.Views;
+package com.challenge.Views.NavigatorViews.Admin;
 
 import com.challenge.Model.Product;
 import com.challenge.Services.ProductService;
-import com.vaadin.data.Item;
+import com.challenge.Views.NavigatorViews.Common.MainUI;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;

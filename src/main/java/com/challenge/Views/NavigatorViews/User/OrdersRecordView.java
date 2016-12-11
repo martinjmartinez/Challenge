@@ -1,11 +1,13 @@
-package com.challenge.Views;
+package com.challenge.Views.NavigatorViews.User;
 
-import com.challenge.Model.CartItem;
 import com.challenge.Model.Receipt;
+import com.challenge.Model.User;
 import com.challenge.Services.ReceiptService;
-import com.challenge.Services.UserService;
+import com.challenge.Views.Modals.ReceiptView;
+import com.challenge.Views.NavigatorViews.Common.MainUI;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.VaadinService;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.VerticalLayout;
@@ -14,7 +16,6 @@ import com.vaadin.ui.*;
 import java.util.List;
 import com.vaadin.data.Item;
 import org.springframework.beans.factory.annotation.Autowired;
-import sun.applet.Main;
 
 import javax.annotation.PostConstruct;
 
@@ -22,50 +23,45 @@ import javax.annotation.PostConstruct;
  * Created by Edward on 12/10/2016.
  */
 @UIScope
-@SpringView(name = ReceiptsView.VIEW_NAME)
-public class ReceiptsView extends VerticalLayout implements View {
-    public static final String VIEW_NAME = "receipts";
+@SpringView(name = OrdersRecordView.VIEW_NAME)
+public class OrdersRecordView extends VerticalLayout implements View {
+    public static final String VIEW_NAME = "Userreceipts";
     @Autowired
     ReceiptService receiptService;
 
-    @Autowired
-    UserService userService;
-
     MainUI mainUI = new MainUI();
-
     @PostConstruct
     void init() {
         mainUI.filterPage();
         setMargin(true);
         setSpacing(true);
-        Table table = new Table("Todos Las Facturas");
-        table.addContainerProperty("ID",Long.class,null);
-        table.addContainerProperty("Usuario",String .class,null);
+        Table table = new Table("Historial De Compras");
         table.addContainerProperty("Fecha",Date.class,null);
         table.addContainerProperty("Entregada", Boolean.class,null);
         table.addContainerProperty("Action", Button.class,null);
 
         table.setSizeFull();
-
+        User currentUser = (User) VaadinService.getCurrentRequest().getWrappedSession().getAttribute("current_user");
         List<Receipt> receipts = receiptService.findAll();
+
         for (Receipt r: receipts){
+            if(r.getUser().getId() != currentUser.getId())
+                continue;
             Object newItemId = table.addItem();
             Item row1 = table.getItem(newItemId);
 
-            Button receiptInfoBtn = new Button("Ver Detalles");
-            receiptInfoBtn.setData(r);
-            List<CartItem> asd = r.getCartItems();
-            receiptInfoBtn.addClickListener(new Button.ClickListener() {
+            Button button = new Button("Ver Detalles");
+            button.setData(r);
+            button.addClickListener(new Button.ClickListener() {
                 @Override
                 public void buttonClick(Button.ClickEvent event) {
                     UI.getCurrent().addWindow(new ReceiptView(r));
                 }
             });
-            row1.getItemProperty("ID").setValue(r.getId());
+
             row1.getItemProperty("Fecha").setValue(new Date());
-            row1.getItemProperty("Usuario").setValue(r.getUser().getName());
             row1.getItemProperty("Entregada").setValue(r.getDelivered());
-            row1.getItemProperty("Action").setValue(receiptInfoBtn);
+            row1.getItemProperty("Action").setValue(button);
         }
 
         addComponent(table);
@@ -74,6 +70,4 @@ public class ReceiptsView extends VerticalLayout implements View {
     public void enter(ViewChangeListener.ViewChangeEvent event) {
 
     }
-
-
 }

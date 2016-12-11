@@ -1,4 +1,4 @@
-package com.challenge.Views;
+package com.challenge.Views.Modals;
 
 import com.challenge.Model.CartItem;
 import com.challenge.Model.Product;

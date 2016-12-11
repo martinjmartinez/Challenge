@@ -1,10 +1,10 @@
-package com.challenge.Views;
+package com.challenge.Views.NavigatorViews.Admin;
 
 import com.challenge.Components.Email;
 import com.challenge.Model.User;
 import com.challenge.Services.UserService;
+import com.challenge.Views.NavigatorViews.Common.MainUI;
 import com.sparkpost.exception.SparkPostException;
-import com.vaadin.data.Item;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -12,7 +12,6 @@ import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import sun.rmi.runtime.Log;
 
 import javax.annotation.PostConstruct;
 

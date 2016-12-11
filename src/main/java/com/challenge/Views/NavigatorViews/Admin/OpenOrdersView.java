@@ -1,7 +1,8 @@
-package com.challenge.Views;
+package com.challenge.Views.NavigatorViews.Admin;
 
 import com.challenge.Model.Receipt;
 import com.challenge.Services.ReceiptService;
+import com.challenge.Views.NavigatorViews.Common.MainUI;
 import com.vaadin.data.Item;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -20,8 +21,8 @@ import java.util.List;
  * Created by Edward on 12/10/2016.
  */
 @UIScope
-@SpringView(name = MarkAsDoneView.VIEW_NAME)
-public class MarkAsDoneView extends VerticalLayout implements View {
+@SpringView(name = OpenOrdersView.VIEW_NAME)
+public class OpenOrdersView extends VerticalLayout implements View {
     public static final String VIEW_NAME = "markasdone";
 
     @Autowired

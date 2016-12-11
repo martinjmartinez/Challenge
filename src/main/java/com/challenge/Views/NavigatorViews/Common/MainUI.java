@@ -1,6 +1,9 @@
-package com.challenge.Views;
+package com.challenge.Views.NavigatorViews.Common;
 
 import com.challenge.Model.User;
+import com.challenge.Views.NavigatorViews.Admin.*;
+import com.challenge.Views.NavigatorViews.User.CartView;
+import com.challenge.Views.NavigatorViews.User.OrdersRecordView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
@@ -37,17 +40,17 @@ public class MainUI extends UI implements ViewDisplay{
 
         }else{
             if(currentUser.isAdmin()){
-                navigationBar.addComponent(createNavigationButton("Products",ProductsView.VIEW_NAME));
-                navigationBar.addComponent(createNavigationButton("Users",UsersView.VIEW_NAME));
-                navigationBar.addComponent(createNavigationButton("Add User",UserFormView.VIEW_NAME));
-                navigationBar.addComponent(createNavigationButton("Add Product",ProductFormView.VIEW_NAME));
-                navigationBar.addComponent(createNavigationButton("Todas Las Ventas",ReceiptsView.VIEW_NAME));
-                navigationBar.addComponent(createNavigationButton("Facturas Para Entregar",MarkAsDoneView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Products", ProductsView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Users", UsersView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Add User", UserFormView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Add Product", ProductFormView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Todas Las Ventas", OrdersView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Facturas Para Entregar", OpenOrdersView.VIEW_NAME));
                 navigationBar.addComponent(logout);
             }else{
                 navigationBar.addComponent(createNavigationButton("Products",ProductsView.VIEW_NAME));
-                navigationBar.addComponent(createNavigationButton("Cart",CartView.VIEW_NAME));
-                navigationBar.addComponent(createNavigationButton("Historial de Compras",UserReceiptView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Cart", CartView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Historial de Compras", OrdersRecordView.VIEW_NAME));
                 navigationBar.addComponent(logout);
             }
         }

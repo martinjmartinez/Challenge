@@ -1,4 +1,4 @@
-package com.challenge.Views;
+package com.challenge.Views.NavigatorViews.User;
 
 import com.challenge.Components.Email;
 import com.challenge.Model.CartItem;
@@ -7,7 +7,7 @@ import com.challenge.Model.User;
 import com.challenge.Services.CartItemService;
 import com.challenge.Services.ReceiptService;
 import com.challenge.Services.UserService;
-import com.sparkpost.exception.SparkPostException;
+import com.challenge.Views.NavigatorViews.Common.MainUI;
 import com.vaadin.data.Item;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -20,7 +20,6 @@ import com.vaadin.ui.VerticalLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
