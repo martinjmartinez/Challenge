@@ -13,10 +13,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Table;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -100,11 +97,11 @@ public class CartView extends VerticalLayout implements View {
                 }
                 receipt.setTotal(total);
                 //TODO UNCOMMENT
-               /* try{
+                try{
                     emailSender.sendReceiptEmail(receipt);
                 }catch (SparkPostException e){
                     System.out.print("Error: " + e);
-                }*/
+                }
                 receiptService.save(receipt);
 
                 for(CartItem ci : cartItems){
@@ -112,6 +109,7 @@ public class CartView extends VerticalLayout implements View {
                   cartItemService.save(ci);
 
                 }
+                UI.getCurrent().addWindow(new SuccesView(receipt));
             }
         });
         addComponents(table, checkout);

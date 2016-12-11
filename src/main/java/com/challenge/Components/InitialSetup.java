@@ -36,11 +36,11 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             return;
         }
 
-        if(!userService.exists("djmartox2@gmail.com")) {
+        if(!userService.exists("djmartox")) {
             User admin = new User();
             admin.setName("Martin");
             admin.setLastname("Martinez");
-            admin.setEmail("djmartox2@gmail.com");
+            admin.setEmail("admin@gmail.com");
             admin.setPassword("admin");
             admin.setRole("Sells Departament");
             admin.setAddress("Calle D, #10, Urb.Casilda");
