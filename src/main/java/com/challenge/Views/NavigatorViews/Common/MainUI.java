@@ -14,7 +14,6 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import pl.exsio.plupload.PluploadReceiver;
 
 /**
  * Created by martin on 09/12/16.
@@ -48,6 +47,7 @@ public class MainUI extends UI implements ViewDisplay{
                 navigationBar.addComponent(createNavigationButton("Add Product", ProductFormView.VIEW_NAME));
                 navigationBar.addComponent(createNavigationButton("Todas Las Ventas", OrdersView.VIEW_NAME));
                 navigationBar.addComponent(createNavigationButton("Facturas Para Entregar", OpenOrdersView.VIEW_NAME));
+                navigationBar.addComponent(createNavigationButton("Graficos de Hoy",ChartsView.VIEW_NAME));
                 navigationBar.addComponent(logout);
             }else{
                 navigationBar.addComponent(createNavigationButton("Products",ProductsView.VIEW_NAME));
