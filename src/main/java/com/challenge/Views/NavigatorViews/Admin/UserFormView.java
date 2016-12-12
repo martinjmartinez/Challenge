@@ -12,8 +12,8 @@ import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.annotation.PostConstruct;
+
 
 /**
  * Created by marti on 10/12/2016.
@@ -47,6 +47,8 @@ public class UserFormView extends VerticalLayout implements View {
         Button addButton = new Button("Add");
         userType.addItems("Generic User", "Sells Departament", "Inventory Departament");
         accountType.addItems("Legal", "Final");
+
+
 
         buttonsContainer.addComponents(addButton);
         formContainer.addComponents(name, lastname, email, userType,address, accountType, password, confirm);

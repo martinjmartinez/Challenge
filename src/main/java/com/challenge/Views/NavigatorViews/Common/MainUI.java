@@ -9,15 +9,17 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinService;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import pl.exsio.plupload.PluploadReceiver;
 
 /**
  * Created by martin on 09/12/16.
  */
-@Theme(ValoTheme.THEME_NAME)
+@Theme("valo")
 @SpringUI
 @SpringViewDisplay
 public class MainUI extends UI implements ViewDisplay{
