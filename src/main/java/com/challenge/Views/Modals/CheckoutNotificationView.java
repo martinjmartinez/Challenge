@@ -28,9 +28,6 @@ import java.util.List;
 
 public class CheckoutNotificationView extends Window{
 
-    @Autowired
-    ReceiptService receiptService;
-
     public CheckoutNotificationView(Receipt receipt) {
         super("Receipt"); // Set window caption
         center();

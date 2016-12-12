@@ -26,13 +26,42 @@ public class ChartsView extends VerticalLayout implements View {
     @Autowired
     ReceiptService receiptService;
 
+
+    Chart chart = new Chart(ChartType.COLUMN);
+    Configuration conf = chart.getConfiguration();
+    XAxis x = new XAxis();
+    void init() {
+        addComponent(chart);
+        UpdateChart();
+    }
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
+        UpdateChart();
+        addComponent(chart);
+    }
+
+    public void UpdateChart(){
         List<Receipt> receiptList = receiptService.findAll();
-        Chart chart = new Chart(ChartType.COLUMN);
-        Configuration conf = chart.getConfiguration();
         conf.setTitle("Resumen del dia");
-        XAxis x = new XAxis();
+
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        for(Receipt r: receiptList){
+            i+=1;
+            if(r.getDelivered()) {
+                j += 1;
+                continue;
+            }
+            k+=1;
+        }
+        conf.addSeries(new ListSeries("Today",i,j,k));
+    }
+
+    public void CreateChart(){
+        List<Receipt> receiptList = receiptService.findAll();
+        conf.setTitle("Resumen del dia");
+
         x.setCategories("Compras Realizadas","Despachos Pendientes","Despachos Realizados");
         conf.addxAxis(x);
         int i = 0;
@@ -47,6 +76,5 @@ public class ChartsView extends VerticalLayout implements View {
             k+=1;
         }
         conf.addSeries(new ListSeries("Today",i,j,k));
-        addComponent(chart);
     }
 }

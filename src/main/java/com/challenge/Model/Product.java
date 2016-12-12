@@ -17,10 +17,10 @@ public class Product {
     @GeneratedValue
     private long id;
     @Column
-    @Size(min = 3, max = 25)
+    @Size(min = 3, max = 100)
     private String name;
     @Column
-    @Size(min = 2, max = 25)
+    @Size(min = 2, max = 1000)
     private String description;
     @Column
     @NotNull

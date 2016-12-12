@@ -9,49 +9,49 @@ import com.sparkpost.exception.SparkPostException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by marti on 10/12/2016.
  */
 
 @Component
 public class Email {
-    @Autowired
-    private ReceiptService receiptService;
-    @Autowired
-    private UserService userService;
 
-
+    String API_KEY = "246b63f0891f476f64bde108861bd5a9e1ecb900";
+    Client client = new Client(API_KEY);
     public void sendUserEmail(User user) throws SparkPostException {
-        String API_KEY = "e1ec696d48a43f251c55fc3c63780f8ded934f69";
-        Client client = new Client(API_KEY);
         String sendTo = user.getEmail();
-
-        client.sendMessage(
-                "Challenge@sparkpostbox.com",
+        /*client.sendMessage(
+                "notification-user@sparkpostbox.com",
                 sendTo,
                 "Welcome!" +  user.getName() + user.getLastname() + "to our App",
-                "<b>Your information:</b>\n"
-                        + "<p>Name: " + user.getName() + " " + user.getLastname()+"</p>"
-                        + "<p>Email: " + user.getEmail() + "</p>"
-                        + "<p>Password: " + user.getPassword() + "</p>",
-                "<b>Auto sent via Spring Vaadin Calendar</b>");
+                "Algo",
+                "<b>Auto sent via Spring Vaadin Calendar</b>");*/
 
     }
 
-    public void sendReceiptEmail(Receipt receipt) throws SparkPostException {
-        String API_KEY = "e1ec696d48a43f251c55fc3c63780f8ded934f69";
-        Client client = new Client(API_KEY);
-        String sendTo = receipt.getUser().getEmail();
-
-        client.sendMessage(
-                "Challenge@sparkpostbox.com",
-                sendTo,
+    public void sendReceiptEmail(Receipt receipt, UserService userService) throws SparkPostException {
+        String sendToUser = receipt.getUser().getEmail();
+        /*client.sendMessage(
+                "notification-order@sparkpostbox.com",
+                sendToUser,
                 "Your Receipt: N.Order("+ receipt.getId() +") Date: " +  receipt.getDate(),
                 //TODO ADD EMAIL CONTENT
-                "Your information:\n",
-                "<b>Auto sent via Spring Vaadin Calendar</b>");
+                "Your information:",
+                "<b>Auto sent via Spring Vaadin Calendar</b>");*/
 
+        List<User> sellDepartamentUsers = userService.findByRole("Sells Departament");
+        for(User user : sellDepartamentUsers){
+            String sendTo = user.getEmail();
+            /*client.sendMessage(
+                    "inventory-departament@sparkpostbox.com",
+                    sendTo,
+                    "New Order Made: N.Order("+ receipt.getId() +") Date: " +  receipt.getDate(),
+                    //TODO ADD EMAIL CONTENT
+                    "Order information:",
+                    "<b>Auto sent via Spring Vaadin Calendar</b>");*/
+        }
     }
-
 }
 

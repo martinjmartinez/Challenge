@@ -42,7 +42,9 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-devtools")
 	compile('org.springframework.boot:spring-boot-starter-web')
     compile group: 'com.vaadin.addon', name: 'vaadin-charts', version: '3.0.0'
-	compile group: 'com.sparkpost', name: 'sparkpost-lib', version: '0.16.1'
+	compile (group: 'com.sparkpost', name: 'sparkpost-lib', version: '0.16.1'){
+		exclude module: 'shared'
+	}
 	compile('com.vaadin:vaadin-spring-boot-starter:1.1.1')
 	runtime('com.h2database:h2')
 }
