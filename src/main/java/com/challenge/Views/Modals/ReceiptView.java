@@ -28,9 +28,6 @@ import java.util.List;
 
 public class ReceiptView extends Window{
 
-    @Autowired
-    ReceiptService receiptService;
-
     public ReceiptView(Receipt receipt) {
         super("Receipt"); // Set window caption
         center();
@@ -43,6 +40,7 @@ public class ReceiptView extends Window{
 
         Label total = new Label("Total: ");
         Label date = new Label("Date: ");
+        Label rnc = new Label("RNC: ");
 
         Table table = new Table("Todos Los Productos");
         table.addContainerProperty("Name",String.class,null);
@@ -66,14 +64,23 @@ public class ReceiptView extends Window{
         setClosable(true);
         total.setSizeFull();
         total.setValue(total.getValue() + receipt.getTotal());
-        date.setValue(receipt.getDate().toString());
-        // Trivial logic for closing the sub-window
+        date.setValue(date.getValue() + receipt.getDate().toString());
+
         Button ok = new Button("OK");
         ok.addClickListener(new Button.ClickListener() {
             public void buttonClick(Button.ClickEvent event) {
                 close(); // Close the sub-window
             }
         });
+        if(receipt.getUser().isEnterprise()){
+            rnc.setValue(rnc.getValue() + receipt.getUser().getTaxReceipt());
+            content.addComponents(date,rnc,table,total,ok);
+        }else{
+            content.addComponents(date,table,total,ok);
+        }
+
+        // Trivial logic for closing the sub-window
+
         content.addComponents(date,table,total,ok);
         setContent(content);
     }

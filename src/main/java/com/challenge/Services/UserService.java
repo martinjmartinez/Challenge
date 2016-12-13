@@ -31,6 +31,10 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+    public List<User> findByRole(String role) {
+        return userRepository.findByRole(role);
+    }
+
     public boolean exists(String email) {
         User user = userRepository.findByEmail(email);
         return user != null;

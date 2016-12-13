@@ -43,6 +43,8 @@ public class User implements Serializable {
     @Column
     @NotNull
     private boolean isEnterprise;
+    @Column
+    private String taxReceipt;
 
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
@@ -121,6 +123,8 @@ public class User implements Serializable {
     public void setAdmin() {
         if(role.equals("Sells Departament") || role.equals("Inventory Departament")){
             isAdmin=true;
+        }else{
+            isAdmin=false;
         }
     }
 
@@ -178,4 +182,11 @@ public class User implements Serializable {
         this.receipts = receipts;
     }
 
+    public String getTaxReceipt() {
+        return taxReceipt;
+    }
+
+    public void setTaxReceipt(String taxReceipt) {
+        this.taxReceipt = taxReceipt;
+    }
 }

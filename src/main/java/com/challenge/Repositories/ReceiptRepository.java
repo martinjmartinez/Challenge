@@ -12,5 +12,6 @@ import java.util.List;
  */
 public interface ReceiptRepository extends CrudRepository<Receipt, Long> {
     List<Receipt> findByUser(User user);
+    List<Receipt> findByDelivered(Boolean delivered);
 }
 

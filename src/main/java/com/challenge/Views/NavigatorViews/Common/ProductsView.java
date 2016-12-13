@@ -38,15 +38,24 @@ public class ProductsView extends VerticalLayout implements View {
 
     @PostConstruct
     void init() {
+        User currentUser = userService.getCurrentUser();
         mainUI.filterPage();
         setMargin(true);
         setSpacing(true);
         Table table = new Table("Todos Los Productos");
-        table.addContainerProperty("Name",String.class,null);
-        table.addContainerProperty("Description",String .class,null);
-        table.addContainerProperty("Quantity available",Integer.class,null);
-        table.addContainerProperty("Price",Float.class,null);
-        table.addContainerProperty("Action", Button.class,null);
+        if(currentUser.isAdmin()){
+            table.addContainerProperty("Name",String.class,null);
+            table.addContainerProperty("Description",String .class,null);
+            table.addContainerProperty("Quantity available",Integer.class,null);
+            table.addContainerProperty("Price",Float.class,null);
+        }else{
+            table.addContainerProperty("Name",String.class,null);
+            table.addContainerProperty("Description",String .class,null);
+            table.addContainerProperty("Quantity available",Integer.class,null);
+            table.addContainerProperty("Price",Float.class,null);
+            table.addContainerProperty("Action", Button.class,null);
+        }
+
 
         table.setSizeFull();
 
@@ -55,13 +64,11 @@ public class ProductsView extends VerticalLayout implements View {
             Object newItemId = table.addItem();
             Item row1 = table.getItem(newItemId);
 
-            Button button = new Button("Añadir al carrito");
+            Button button = new Button("Add to Cart");
             button.setData(p);
             button.addClickListener(new Button.ClickListener() {
                 @Override
                 public void buttonClick(Button.ClickEvent event) {
-                    User currentUser = userService.getCurrentUser();
-
                     if(cartItemService.findByUserAndProduct(currentUser, p)!=null){
                         CartItem cartItem = cartItemService.findByUserAndProduct(currentUser, p);
                         cartItem.setQuantity(cartItem.getQuantity() + 1);
@@ -77,11 +84,19 @@ public class ProductsView extends VerticalLayout implements View {
                 }
             });
 
-            row1.getItemProperty("Quantity available").setValue(p.getQuantity());
-            row1.getItemProperty("Name").setValue(p.getName());
-            row1.getItemProperty("Description").setValue(p.getDescription());
-            row1.getItemProperty("Price").setValue(p.getPrice());
-            row1.getItemProperty("Action").setValue(button);
+            if(currentUser.isAdmin()){
+                row1.getItemProperty("Quantity available").setValue(p.getQuantity());
+                row1.getItemProperty("Name").setValue(p.getName());
+                row1.getItemProperty("Description").setValue(p.getDescription());
+                row1.getItemProperty("Price").setValue(p.getPrice());
+            }else{
+                row1.getItemProperty("Quantity available").setValue(p.getQuantity());
+                row1.getItemProperty("Name").setValue(p.getName());
+                row1.getItemProperty("Description").setValue(p.getDescription());
+                row1.getItemProperty("Price").setValue(p.getPrice());
+                row1.getItemProperty("Action").setValue(button);
+            }
+
         }
 
         addComponent(table);

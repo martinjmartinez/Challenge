@@ -3,8 +3,12 @@ package com.challenge.Views.NavigatorViews.Admin;
 import com.challenge.Components.Email;
 import com.challenge.Model.User;
 import com.challenge.Services.UserService;
+import com.challenge.Views.Modals.CheckoutNotificationView;
+import com.challenge.Views.Modals.TaxReceipt;
 import com.challenge.Views.NavigatorViews.Common.MainUI;
 import com.sparkpost.exception.SparkPostException;
+import com.vaadin.data.Container;
+import com.vaadin.data.Property;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -48,18 +52,24 @@ public class UserFormView extends VerticalLayout implements View {
         userType.addItems("Generic User", "Sells Departament", "Inventory Departament");
         accountType.addItems("Legal", "Final");
 
-
+        formContainer.addComponents(name, lastname, email, userType,address, accountType, password, confirm);
 
         buttonsContainer.addComponents(addButton);
-        formContainer.addComponents(name, lastname, email, userType,address, accountType, password, confirm);
         setSizeUndefined();
 
         setMargin(true);
         setSpacing(true);
-
+        User user =  new User();
+        accountType.addValueChangeListener(new Property.ValueChangeListener() {
+            @Override
+            public void valueChange(Property.ValueChangeEvent event) {
+                if(accountType.getValue().toString().equals("Legal")){
+                    UI.getCurrent().addWindow(new TaxReceipt(user, userService));
+                }
+            }
+        });
         addButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         addButton.addClickListener((Button.ClickListener) event -> {
-            User user =  new User();
             user.setName(name.getValue());
             user.setLastname(lastname.getValue());
             user.setEmail(email.getValue());
@@ -69,8 +79,8 @@ public class UserFormView extends VerticalLayout implements View {
             if(password.getValue().equals(confirm.getValue())){
                 user.setPassword(password.getValue());
             }
-
             userService.save(user);
+
             try{
                 emailSender.sendUserEmail(user);
             }catch (SparkPostException e){

@@ -70,8 +70,9 @@ public class CartView extends VerticalLayout implements View {
             row1.getItemProperty("Price").setValue(ci.getProduct().getPrice());
             row1.getItemProperty("Quantity").setValue(quantityInput);
 
-            ci.setQuantity(Integer.parseInt(quantityInput.getValue()));
+
             if(Integer.parseInt(quantityInput.getValue())!= ci.getQuantity()){
+                ci.setQuantity(Integer.parseInt(quantityInput.getValue()));
                 cartItemService.save(ci);
             }
 
@@ -98,9 +99,9 @@ public class CartView extends VerticalLayout implements View {
                     CantidadItems += ci.getProduct().getQuantity();
                 }
                 receipt.setTotal(total);
-                //TODO UNCOMMENT
+
                 try{
-                    emailSender.sendReceiptEmail(receipt);
+                    emailSender.sendReceiptEmail(receipt, userService);
                 }catch (SparkPostException e){
                     System.out.print("Error: " + e);
                 }
@@ -109,7 +110,6 @@ public class CartView extends VerticalLayout implements View {
                 for(CartItem ci : cartItems){
                   ci.setReceipt(receipt);
                   cartItemService.save(ci);
-
                 }
                 UI.getCurrent().addWindow(new CheckoutNotificationView(receipt));
             }
