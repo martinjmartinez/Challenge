@@ -16,7 +16,7 @@ public class Receipt {
     private long id;
 
     @Column
-    private Boolean isDelivered = false;
+    private Boolean delivered = false;
 
     @Column
     private Date date;
@@ -59,11 +59,11 @@ public class Receipt {
     }
 
     public Boolean getDelivered() {
-        return isDelivered;
+        return delivered;
     }
 
     public void setDelivered(Boolean delivered) {
-        isDelivered = delivered;
+        this.delivered = delivered;
     }
 
     public Receipt(){}

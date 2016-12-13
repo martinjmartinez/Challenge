@@ -10,7 +10,5 @@ public class ChallengeApplication {
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
 		SpringApplication.run(ChallengeApplication.class, args);
-
-
 	}
 }

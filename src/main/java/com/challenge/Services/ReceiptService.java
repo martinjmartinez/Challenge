@@ -25,6 +25,10 @@ public class ReceiptService {
         return receiptRepository.findByUser(user);
     }
 
+    public List<Receipt> findByDelivered(Boolean delivered) {
+        return receiptRepository.findByDelivered(delivered);
+    }
+
     @Transactional
     public Receipt save(Receipt receipt) {
         receiptRepository.save(receipt);

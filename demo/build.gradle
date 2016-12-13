@@ -1,0 +1,12 @@
+plugins {
+    // Uncomment this if Vaadin plugin is not applied in the parent module
+    // id "fi.jasoft.plugin.vaadin" version "1.0"
+}
+
+// Apply the Vaadin plugin
+apply plugin: 'fi.jasoft.plugin.vaadin'
+
+// Demo depends on the addon
+dependencies {
+    compile project(':addon')
+}

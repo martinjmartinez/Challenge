@@ -70,8 +70,9 @@ public class CartView extends VerticalLayout implements View {
             row1.getItemProperty("Price").setValue(ci.getProduct().getPrice());
             row1.getItemProperty("Quantity").setValue(quantityInput);
 
-            ci.setQuantity(Integer.parseInt(quantityInput.getValue()));
+
             if(Integer.parseInt(quantityInput.getValue())!= ci.getQuantity()){
+                ci.setQuantity(Integer.parseInt(quantityInput.getValue()));
                 cartItemService.save(ci);
             }
 
