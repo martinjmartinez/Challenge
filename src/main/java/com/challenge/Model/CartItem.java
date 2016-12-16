@@ -17,6 +17,9 @@ public class CartItem {
     @Column
     private Integer quantity;
 
+    @Column
+    private Boolean inCart;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private Product product;
 
@@ -72,5 +75,13 @@ public class CartItem {
 
     public void setReceipt(Receipt receipt) {
         this.receipt = receipt;
+    }
+
+    public Boolean getInCart() {
+        return inCart;
+    }
+
+    public void setInCart(Boolean inCart) {
+        this.inCart = inCart;
     }
 }

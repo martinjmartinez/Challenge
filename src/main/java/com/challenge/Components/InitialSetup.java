@@ -74,7 +74,7 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             User admin4 = new User();
             admin4.setName("Juan");
             admin4.setLastname("Gutierrez");
-            admin4.setEmail("martin26_8@hotmail.com");
+            admin4.setEmail("martin26_8@me.com");
             admin4.setPassword("admin");
             admin4.setRole("Generic User");
             admin4.setAddress("Calle Argentina, #7, Las Carmelitas");

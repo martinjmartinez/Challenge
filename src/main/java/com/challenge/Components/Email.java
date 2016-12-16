@@ -38,8 +38,12 @@ public class Email {
                 sendToUser,
                 "Your Receipt: N.Order("+ receipt.getId() +") Date: " +  receipt.getDate(),
                 //TODO ADD EMAIL CONTENT
-                "Your information:",
-                "<b>Auto sent via Spring Vaadin Calendar</b>");*/
+                "<b>Order information:<b/>",
+                "<b>Order information:</b>" +
+                        "<br>Nombre: " + receipt.getUser().getName() +
+                        "<br>Fecha: " + receipt.getDate() +
+                        "<br>Cantidad de productos: " + receipt.getCantidadItems()
+        );*/
 
         List<User> sellDepartamentUsers = userService.findByRole("Sells Departament");
         for(User user : sellDepartamentUsers){
@@ -49,7 +53,7 @@ public class Email {
                     sendTo,
                     "New Order Made: N.Order("+ receipt.getId() +") Date: " +  receipt.getDate(),
                     //TODO ADD EMAIL CONTENT
-                    "Order information:",
+                    "<b>Order information:<b/>",
                     "<b>Auto sent via Spring Vaadin Calendar</b>");*/
         }
     }

@@ -32,10 +32,14 @@ public class ChartsView extends VerticalLayout implements View {
     Integer[] databaseResult = new Integer[3];
     Chart chart;
     Configuration chartConfiguration;
-    VerticalLayout layout;
+    VerticalLayout layout = new VerticalLayout();;
     @PostConstruct
     void init() {
-        layout = new VerticalLayout();
+
+    }
+
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent event) {
         layout.setMargin(true);
 
         chart = new Chart(ChartType.BAR);
@@ -54,6 +58,7 @@ public class ChartsView extends VerticalLayout implements View {
         xaxis.setCategories("All Orders", "Queue Orders", "Complete Orders");
         chartConfiguration.addxAxis(xaxis);
 
+        dataSeries.clear();
         dataSeries.add(allOrders);
         dataSeries.add(queueOrders);
         dataSeries.add(completeOrders);
@@ -62,11 +67,6 @@ public class ChartsView extends VerticalLayout implements View {
         chartConfiguration.addSeries(dataSeries);
         layout.addComponent(chart);
         addComponent(layout);
-    }
-
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent event) {
-
 
     }
 

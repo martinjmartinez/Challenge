@@ -78,6 +78,7 @@ public class ProductsView extends VerticalLayout implements View {
                         CartItem cartItem = new CartItem();
                         cartItem.setProduct(p);
                         cartItem.setQuantity(1);
+                        cartItem.setInCart(true);
                         cartItem.setUser(currentUser);
                         cartItemService.save(cartItem);
                     }
